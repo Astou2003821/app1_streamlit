@@ -1,5 +1,5 @@
 import pandas as pd
-df = pd.read_csv('C:/Users/user/Downloads/Expresso_churn_dataset.csv.crdownload')
+df = pd.read_csv('Expresso_churn_dataset.csv')
 df.head()
 
 df.info()
