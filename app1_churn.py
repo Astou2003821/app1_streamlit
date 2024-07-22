@@ -102,8 +102,8 @@ if st.sidebar.button("Valider"):
     st.subheader("Caractéristiques de l'utilisateur")
     st.write(user_input)
 
-    prediction_proba = model.predict_proba(user_input)[:, 1][0]
-    prediction = model.predict(user_input)[0]
+    prediction_proba = model.predict_proba(user_input)[:, 1]
+    prediction = model.predict(user_input)
 
     st.write('## Prédiction')
     churn_status = "Oui" if prediction == 1 else "Non"
