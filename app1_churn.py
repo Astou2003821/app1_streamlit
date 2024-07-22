@@ -123,4 +123,4 @@ if st.sidebar.button("Valider"):
     st.write(f"Le client va-t-il churn? {churn_status}")
 
     st.write('## Probabilité de churn')
-    st.write(f"{prediction_proba:.2f}")
+    st.write(f"{prediction_proba}")
