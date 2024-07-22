@@ -9,7 +9,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, roc_auc_score, roc_curve
 import joblib
 
-df = pd.read_csv('Expresso_churn_dataset.csv')
+df = pd.read_csv('df.csv')
 
 st.title("Prédiction de Expresso churn")
 
