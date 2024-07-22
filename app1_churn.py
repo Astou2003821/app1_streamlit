@@ -59,7 +59,7 @@ clf = LogisticRegression(max_iter=1000, random_state=42)
 clf.fit(X_train, y_train)
 
 y_pred = clf.predict(X_test)
-y_pred_proba = clf.predict_proba(X_test)[:, 1]
+y_pred_proba = clf.predict_proba(X_test)
 
 accuracy = accuracy_score(y_test, y_pred)
 classification_rep = classification_report(y_test, y_pred)
@@ -76,9 +76,9 @@ st.write(f'ROC AUC Score: {roc_auc}')
 fpr, tpr, _ = roc_curve(y_test, y_pred_proba)
 plt.figure()
 plt.plot(fpr, tpr, color='blue', lw=2, label='ROC curve (area = %0.2f)' % roc_auc)
-plt.plot([0, 1], [0, 1], color='gray', lw=2, linestyle='--')
-plt.xlim([0.0, 1.0])
-plt.ylim([0.0, 1.05])
+plt.plot(color='gray', lw=2, linestyle='--')
+plt.xlim()
+plt.ylim()
 plt.xlabel('Taux de faux positifs')
 plt.ylabel('Taux de vrais positifs')
 plt.title('Courbe ROC')
@@ -102,7 +102,7 @@ if st.sidebar.button("Valider"):
     st.subheader("Caractéristiques de l'utilisateur")
     st.write(user_input)
 
-    prediction_proba = model.predict_proba(user_input)[:, 1]
+    prediction_proba = model.predict_proba(user_input)
     prediction = model.predict(user_input)
 
     st.write('## Prédiction')
