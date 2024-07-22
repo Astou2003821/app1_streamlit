@@ -86,7 +86,7 @@ plt.title('courbe ROC')
 plt.legend(loc="lower right")
 plt.show()
 
-fpr, tpr, _ = roc_curve(y_test, y_pred_proba)
+fpr, tpr, _ = roc_curve(y_test, y_pred)
 plt.figure()
 plt.plot(fpr, tpr, color='blue', lw=2, label='ROC curve (area = %0.2f)' % roc_auc)
 plt.plot(color='gray', lw=2, linestyle='--')
