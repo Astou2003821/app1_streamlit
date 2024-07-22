@@ -56,22 +56,35 @@ y = df["CHURN"]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 clf = LogisticRegression(max_iter=1000, random_state=42)
+
 clf.fit(X_train, y_train)
 
 y_pred = clf.predict(X_test)
-y_pred_proba = clf.predict_proba(X_test)[:-1]
+y_pred = clf.predict(X_test)
 
 accuracy = accuracy_score(y_test, y_pred)
 classification_rep = classification_report(y_test, y_pred)
 confusion_mat = confusion_matrix(y_test, y_pred)
-roc_auc = roc_auc_score(y_test, y_pred_proba)
+roc_auc = roc_auc_score(y_test, y_pred)
 
 st.write(f'Accuracy: {accuracy}')
 st.write('Classification Report:')
-st.text(classification_rep)
+st.write(classification_rep)
 st.write('Confusion Matrix:')
-st.dataframe(confusion_mat)
+st.write(confusion_mat)
 st.write(f'ROC AUC Score: {roc_auc}')
+
+fpr, tpr, _ = roc_curve(y_test, y_pred)
+plt.figure()
+plt.plot(fpr, tpr, color='blue', lw=2, label='ROC curve (area = %0.2f)' % roc_auc)
+plt.plot([0, 1], [0, 1], color='gray', lw=2, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('Taux de vrai positif')
+plt.ylabel('Taux de vrai négatif')
+plt.title('courbe ROC')
+plt.legend(loc="lower right")
+plt.show()
 
 fpr, tpr, _ = roc_curve(y_test, y_pred_proba)
 plt.figure()
