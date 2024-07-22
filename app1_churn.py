@@ -59,7 +59,7 @@ clf = LogisticRegression(max_iter=1000, random_state=42)
 clf.fit(X_train, y_train)
 
 y_pred = clf.predict(X_test)
-y_pred_proba = clf.predict_proba(X_test)
+y_pred_proba = clf.predict_proba(X_test)[:, 1]
 
 accuracy = accuracy_score(y_test, y_pred)
 classification_rep = classification_report(y_test, y_pred)
