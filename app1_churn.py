@@ -9,7 +9,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, roc_auc_score, roc_curve
 import joblib
 
-df = pd.read_csv('df.csv', nrows=100000)
+df = pd.read_csv('df.csv')
 
 st.title("Prédiction de Expresso churn")
 
@@ -22,12 +22,6 @@ st.write('## Info du dataframe')
 st.write(df.info())
 
 st.write('## Valeurs manquantes du dataframe')
-st.dataframe(df.isnull().sum())
-
-st.write('## gerer les Valeurs manquantes')
-df.fillna(df.mode().iloc[0], inplace=True)
-
-st.write('## Valeurs manquantes après traitement')
 st.dataframe(df.isnull().sum())
 
 st.write('## Valeurs aberrantes avec le boxplot')
