@@ -7,7 +7,9 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, roc_auc_score, roc_curve
-import joblib
+import tensorflow as tf
+from tensorflow import keras
+import model_loads as model
 
 df = pd.read_csv('df.csv')
 
@@ -92,29 +94,30 @@ plt.title('Courbe ROC')
 plt.legend(loc="lower right")
 st.pyplot(plt)
 
-st.write('## Chargement du modèle') 
-model = joblib.load('logistic_regression_model.pkl')
-model_columns = joblib.load('model_columns.pkl')
-st.subheader("Caractéristiques de l'utilisateur")
+st.write('## Charger le modèle Keras')
 
-def get_user_input():
-    inputs = {}
-    for column in model_columns:
-        inputs[column] = st.sidebar.number_input(f"{column}", value=0)
-    return pd.DataFrame([inputs])
+def load_model():
+    model = keras.models.load_model('logistic_regression_model.h5')
+    return model
 
-user_input = get_user_input()
+model = load_model()
 
-if st.sidebar.button("Valider"):
-    st.subheader("Caractéristiques de l'utilisateur")
-    st.write(user_input)
+st.write('## Titre de l-application')
 
-    prediction_proba = model.predict_proba(user_input)
-    prediction = model.predict(user_input)
+st.title('Application de Régression avec Keras et Streamlit')
 
-    st.write('## Prédiction')
-    churn_status = "Oui" if prediction == 1 else "Non"
-    st.write(f"Le client va-t-il churn? {churn_status}")
+st.write('## Entrée utilisateur')
+st.header('Entrer les caractéristiques du modèle')
+input_1 = st.number_input('Entrée 1', value=0.0)
+input_2 = st.number_input('Entrée 2', value=0.0)
+input_3 = st.number_input('Entrée 3', value=0.0)
 
-    st.write('## Probabilité de churn')
-    st.write(f"{prediction_proba}")
+st.write('## Convertir les entrées en numpy array pour la prédiction')
+input_data = np.array([[input_1, input_2, input_3]])
+
+st.write('## Bouton de prédiction')
+if st.button('Prédire'):
+    prediction = model.predict(input_data)
+    st.write(f'La prédiction est: {prediction[0][0]}')
+    predictions = model.predict(input_data)
+    st.write("Prédictions : ", predictions)
