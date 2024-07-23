@@ -9,7 +9,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, roc_auc_score, roc_curve
 import joblib
 
-df = pd.read_csv('df.csv')
+df = pd.read_csv('df.csv', nrows=100000)
 
 st.title("Prédiction de Expresso churn")
 
@@ -121,5 +121,6 @@ if st.sidebar.button("Valider"):
     st.write('## Prédiction')
     churn_status = "Oui" if prediction == 1 else "Non"
     st.write(f"Le client va-t-il churn? {churn_status}")
+
     st.write('## Probabilité de churn')
-    st.write(f"{prediction_proba}") 
+    st.write(f"{prediction_proba}")
