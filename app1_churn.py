@@ -119,8 +119,7 @@ if st.sidebar.button("Valider"):
     prediction = model.predict(user_input)
 
     st.write('## Prédiction')
-    churn_status = "Oui" if prediction[0] == 1 else "Non"
+    churn_status = "Oui" if prediction == 1 else "Non"
     st.write(f"Le client va-t-il churn? {churn_status}")
-
     st.write('## Probabilité de churn')
-    st.write(f"{prediction_proba[0]}")
+    st.write(f"{prediction_proba}") 
