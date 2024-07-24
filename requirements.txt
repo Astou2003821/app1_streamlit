@@ -1,3 +1,4 @@
+tabulate
 torch
 model_loads==0.3
 absl-py==2.1.0
